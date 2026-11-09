@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRP / Go - Thiết lập giá thuê xe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+  <a class="logo" href="#">VRP <span>/ Go</span></a>
+  <nav><a href="#">Trang chủ</a><a href="#">Thuê xe</a><a href="#">Cách hoạt động</a><a href="#">Về chúng tôi</a><a href="#">Lịch</a></nav>
+  <div class="nav-buttons"><button class="login">Đăng nhập</button><button class="signup">Đăng ký</button></div>
+</header>
+
+<main class="container">
+  <div class="page-heading">
+    <div>
+      <span class="eyebrow">QUẢN LÝ XE CHO THUÊ</span>
+      <h1>Thiết lập giá thuê xe</h1>
+      <p>Thiết lập mức giá linh hoạt theo ngày thường, cuối tuần và ngày lễ.</p>
+    </div>
+    <div class="step-badge"><span>02</span><div><b>Giá thuê</b><small>Bước 2 / 3</small></div></div>
+  </div>
+
+  <div class="progress"><span></span></div>
+
+  <div class="main-grid">
+    <section class="panel">
+      <div class="panel-heading">
+        <div class="heading-icon">₫</div>
+        <div><h2>Bảng giá thuê</h2><p>Giá áp dụng cho 1 ngày thuê (24 giờ).</p></div>
+      </div>
+
+      <form id="priceForm">
+        <div class="price-card weekday">
+          <div class="price-card-head">
+            <div class="day-icon">☀</div>
+            <div class="day-title"><h3>Ngày thường</h3><p>Thứ 2 – Thứ 6</p></div>
+            <span class="tag">Giá cơ bản</span>
+          </div>
+          <label class="field-label" for="weekdayPrice">Giá thuê / ngày <span>*</span></label>
+          <div class="price-input"><input id="weekdayPrice" type="number" min="0" placeholder="Ví dụ: 800000" required><span>VNĐ</span></div>
+          <small class="helper">Mức giá áp dụng trong các ngày làm việc.</small>
+        </div>
+
+        <div class="price-card weekend">
+          <div class="price-card-head">
+            <div class="day-icon">☷</div>
+            <div class="day-title"><h3>Cuối tuần</h3><p>Thứ 7 – Chủ nhật</p></div>
+            <span class="tag">Nhu cầu cao</span>
+          </div>
+          <label class="field-label" for="weekendPrice">Giá thuê / ngày <span>*</span></label>
+          <div class="price-input"><input id="weekendPrice" type="number" min="0" placeholder="Ví dụ: 1000000" required><span>VNĐ</span></div>
+          <small class="helper">Bạn có thể đặt giá cao hơn ngày thường.</small>
+        </div>
+
+        <div class="price-card holiday">
+          <div class="price-card-head">
+            <div class="day-icon">✦</div>
+            <div class="day-title"><h3>Ngày lễ, Tết</h3><p>Các ngày lễ và dịp đặc biệt</p></div>
+            <span class="tag">Ngày đặc biệt</span>
+          </div>
+          <label class="field-label" for="holidayPrice">Giá thuê / ngày <span>*</span></label>
+          <div class="price-input"><input id="holidayPrice" type="number" min="0" placeholder="Ví dụ: 1200000" required><span>VNĐ</span></div>
+          <small class="helper">Áp dụng theo lịch ngày lễ hoặc ngày bạn đánh dấu.</small>
+        </div>
+
+        <div class="extra-settings">
+          <h3>Thiết lập thêm</h3>
+          <label class="toggle-row">
+            <div><b>Cho phép khách đặt xe vào ngày lễ</b><small>Bạn vẫn có thể chỉnh giá riêng cho từng ngày.</small></div>
+            <input type="checkbox" id="holidayEnabled" checked><span class="switch"></span>
+          </label>
+          <div class="date-row">
+            <label for="holidayStart">Ngày lễ áp dụng từ</label>
+            <input type="date" id="holidayStart">
+            <label for="holidayEnd">đến</label>
+            <input type="date" id="holidayEnd">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="resetBtn">Đặt lại</button>
+          <button type="submit" class="btn-primary">Lưu bảng giá <span>→</span></button>
+        </div>
+        <p id="notice" class="notice" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <aside class="side-column">
+      <section class="summary-card">
+        <div class="summary-top"><span class="summary-icon">▤</span><span class="status">Bản xem trước</span></div>
+        <h3>Giá thuê xe của bạn</h3>
+        <p class="summary-sub">Giá tham khảo mỗi ngày</p>
+        <div class="summary-price"><small>Ngày thường</small><strong id="weekdayPreview">—</strong></div>
+        <div class="summary-price"><small>Cuối tuần</small><strong id="weekendPreview">—</strong></div>
+        <div class="summary-price"><small>Ngày lễ, Tết</small><strong id="holidayPreview">—</strong></div>
+        <div class="summary-foot">Giá hiển thị chưa bao gồm phí phát sinh (nếu có).</div>
+      </section>
+
+      <section class="tip-card">
+        <div class="tip-title"><span>✦</span><b>Mẹo đặt giá</b></div>
+        <ul>
+          <li>Tham khảo giá thuê xe cùng phân khúc.</li>
+          <li>Cuối tuần và ngày lễ thường có nhu cầu cao.</li>
+          <li>Đảm bảo giá đã tính các chi phí vận hành.</li>
+        </ul>
+      </section>
+
+      <div class="secure-note">♧　Thông tin giá thuê chỉ được cập nhật khi bạn nhấn <b>Lưu bảng giá</b>.</div>
+    </aside>
+  </div>
+</main>
+
+<script>
+const ids = ['weekdayPrice', 'weekendPrice', 'holidayPrice'];
+const previews = ['weekdayPreview', 'weekendPreview', 'holidayPreview'];
+const formatVND = value => value ? Number(value).toLocaleString('vi-VN') + ' ₫' : '—';
+
+ids.forEach((id, i) => {
+  document.getElementById(id).addEventListener('input', e => {
+    document.getElementById(previews[i]).textContent = formatVND(e.target.value);
+  });
+});
+
+document.getElementById('holidayEnabled').addEventListener('change', e => {
+  document.getElementById('holidayPrice').disabled = !e.target.checked;
+  document.getElementById('holidayStart').disabled = !e.target.checked;
+  document.getElementById('holidayEnd').disabled = !e.target.checked;
+});
+
+document.getElementById('priceForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('notice').textContent = '✓ Bảng giá đã được cập nhật trên giao diện.';
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('priceForm').reset();
+  previews.forEach(id => document.getElementById(id).textContent = '—');
+  document.getElementById('notice').textContent = '';
+  document.getElementById('holidayPrice').disabled = false;
+  document.getElementById('holidayStart').disabled = false;
+  document.getElementById('holidayEnd').disabled = false;
+});
+</script>
+</body>
+</html>
