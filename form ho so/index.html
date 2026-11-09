@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VRP / Go - Hồ sơ cá nhân</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+  <a class="logo" href="#">VRP <span>/ Go</span></a>
+  <nav><a>Trang chủ</a><a>Thuê xe</a><a>Cách hoạt động</a><a>Về chúng tôi</a><a>Lịch</a></nav>
+  <div class="nav-buttons"><button class="login">Đăng nhập</button><button class="signup">Đăng ký</button></div>
+</header>
+
+<main class="container">
+  <div class="welcome">
+    <div><small>TÀI KHOẢN VRP / GO</small><h1>Xin chào, <span>Nguyễn Văn A!</span></h1><p>Quản lý thông tin cá nhân và hồ sơ của bạn.</p></div>
+    <div class="member">✦ <div><b>Thành viên</b><small>VRP / Go</small></div></div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>Tài khoản của tôi</h3>
+      <a class="active">♙　Tài khoản của tôi</a><a>🚘　Trở thành chủ xe</a><a>♡　Xe yêu thích</a>
+      <a>▣　Chuyến của tôi</a><a>▤　Đơn hàng thuê xe</a><a>♧　Ưu đãi của tôi</a>
+      <a>♧　Giới thiệu bạn bè</a><a>⌖　Địa chỉ của tôi</a>
+    </aside>
+
+    <section class="content">
+      <section class="card">
+        <div class="card-title"><div><h2>Thông tin tài khoản</h2><p>Thông tin cá nhân của bạn</p></div><button class="edit">✎</button></div>
+
+        <div class="profile">
+          <div class="avatar-area">
+            <div class="avatar" id="avatar"><span id="initials">VA</span><img id="preview" hidden alt="Ảnh đại diện"></div>
+            <label class="camera-badge" for="cameraInput">📷</label>
+            <h3 id="displayName">Nguyễn Văn A</h3><p class="muted">Tham gia: 08/11/2026</p>
+            <div class="points">🏅 <b>0 điểm</b></div>
+            <div class="photo-buttons">
+              <label class="photo-btn green" for="cameraInput">📷 Chụp ảnh</label>
+              <input id="cameraInput" type="file" accept="image/*" capture="user" hidden>
+              <label class="photo-btn outline" for="galleryInput">▧ Chọn ảnh từ thư viện</label>
+              <input id="galleryInput" type="file" accept="image/*" hidden>
+              <button id="removePhoto" hidden>Xóa ảnh</button>
+              <small>JPG, PNG • tối đa 5MB</small>
+            </div>
+          </div>
+
+          <div class="account-info">
+            <div class="info-box"><div><span>Ngày sinh</span><b id="birthDisplay">Chưa cập nhật</b></div><div><span>Giới tính</span><b id="genderDisplay">Chưa cập nhật</b></div></div>
+            <div class="info-row"><span>Họ và tên</span><b id="nameDisplay">Nguyễn Văn A</b></div>
+            <div class="info-row"><span>Tên người dùng</span><b id="userDisplay">nguyenvana</b></div>
+            <div class="info-row"><span>Số điện thoại <i class="warning">● Chưa xác thực</i></span><b id="phoneDisplay">Thêm số điện thoại　✎</b></div>
+            <div class="info-row"><span>Email <i class="success">● Đã xác thực</i></span><b id="emailDisplay">email@example.com　✎</b></div>
+            <div class="info-row"><span>Facebook</span><b>Thêm liên kết　↗</b></div>
+            <div class="info-row"><span>Google</span><b>Chưa liên kết　↗</b></div>
+          </div>
+        </div>
+
+        <form id="profileForm" class="form-section">
+          <div class="form-title"><div><h3>Chỉnh sửa hồ sơ</h3><p>Cập nhật thông tin để việc thuê xe thuận tiện hơn.</p></div><small>* Thông tin bắt buộc</small></div>
+          <div class="form-grid">
+            <label>Họ và tên *<input id="fullName" value="Nguyễn Văn A" required></label>
+            <label>Tên người dùng<input id="username" value="nguyenvana"></label>
+            <label>Số điện thoại<input id="phone" type="tel" placeholder="Nhập số điện thoại"></label>
+            <label>Email *<input id="email" type="email" value="email@example.com" required></label>
+            <label>Ngày sinh<input id="birthday" type="date"></label>
+            <label>Giới tính<select id="gender"><option value="">Chọn giới tính</option><option>Nam</option><option>Nữ</option><option>Khác</option></select></label>
+            <label class="wide">Giới thiệu bản thân<textarea rows="3" placeholder="Viết vài dòng giới thiệu về bạn..."></textarea></label>
+          </div>
+          <div class="form-footer"><small id="saveNote">Thông tin của bạn được bảo mật.</small><div><button type="reset" class="cancel">Hủy thay đổi</button><button type="submit" class="save">Lưu hồ sơ →</button></div></div>
+        </form>
+      </section>
+
+      <section class="card license">
+        <div class="card-title"><h2>Giấy phép lái xe <i class="warning">● Chưa xác thực</i></h2><button class="cancel">Chỉnh sửa ✎</button></div>
+        <p class="muted">Bổ sung giấy phép lái xe để sẵn sàng cho chuyến đi của bạn.</p>
+        <div class="license-upload"><span>▤</span><div><b>Thêm giấy phép lái xe</b><small>Ảnh rõ nét, đầy đủ thông tin</small></div><button class="cancel">Tải ảnh lên</button></div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<script>
+const camera = document.getElementById('cameraInput');
+const gallery = document.getElementById('galleryInput');
+const preview = document.getElementById('preview');
+const initials = document.getElementById('initials');
+const remove = document.getElementById('removePhoto');
+
+function showImage(file) {
+  if (!file) return;
+  if (!file.type.startsWith('image/')) return alert('Vui lòng chọn file ảnh.');
+  if (file.size > 5 * 1024 * 1024) return alert('Ảnh tối đa 5MB.');
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+    preview.hidden = false;
+    initials.style.display = 'none';
+    remove.hidden = false;
+  };
+  reader.readAsDataURL(file);
+}
+camera.addEventListener('change', () => showImage(camera.files[0]));
+gallery.addEventListener('change', () => showImage(gallery.files[0]));
+remove.addEventListener('click', () => {
+  preview.src = ''; preview.hidden = true; initials.style.display = '';
+  camera.value = ''; gallery.value = ''; remove.hidden = true;
+});
+document.getElementById('profileForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('fullName').value.trim();
+  document.getElementById('displayName').textContent = name;
+  document.getElementById('nameDisplay').textContent = name;
+  document.getElementById('userDisplay').textContent = document.getElementById('username').value;
+  document.getElementById('phoneDisplay').textContent = document.getElementById('phone').value || 'Thêm số điện thoại';
+  document.getElementById('emailDisplay').textContent = document.getElementById('email').value;
+  document.getElementById('birthDisplay').textContent = document.getElementById('birthday').value || 'Chưa cập nhật';
+  document.getElementById('genderDisplay').textContent = document.getElementById('gender').value || 'Chưa cập nhật';
+  document.getElementById('saveNote').textContent = '✓ Hồ sơ đã cập nhật trên giao diện!';
+  initials.textContent = name.split(' ').slice(-2).map(x => x[0]).join('').toUpperCase() || 'VR';
+});
+</script>
+</body>
+</html>
